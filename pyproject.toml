@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=84.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cmucw"
+version = "0.1.0"
+description = "A command-line toolkit for CMU coursework across Canvas, Piazza, Gradescope, Ed Discussion, and SIO."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{name = "Jiatao Li"}]
+dependencies = ["requests>=2.31,<3", "beautifulsoup4>=4.12,<5", "python-dateutil>=2.8,<3", "tzdata>=2024.1"]
+
+[project.urls]
+Source = "https://github.com/leejamesss/cmu-cli"
+Issues = "https://github.com/leejamesss/cmu-cli/issues"
+
+[project.optional-dependencies]
+browser = ["browser-cookie3>=0.20,<1"]
+dev = ["pytest>=8,<10", "build>=1.2,<2", "twine>=5,<7", "jsonschema>=4.20,<5", "ruff==0.15.6"]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 88
+
+[tool.ruff.lint]
+# Correctness, imports, modernization, common bugs and targeted safety checks.
+select = ["E4", "E7", "E9", "F", "I", "UP", "B", "SIM", "C4", "BLE", "EXE", "PLW", "TRY004", "FURB", "RUF059"]
+
+[project.scripts]
+cmucw = "cmucw.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+
+[tool.setuptools.package-data]
+cmucw = ["config.example.json"]

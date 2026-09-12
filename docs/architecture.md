@@ -1,0 +1,9 @@
+# Architecture and scope
+
+`models` loads and validates explicit user configuration. `cli` handles English-first rendering and the versioned result contract. `canvas_client` and optional provider modules supply remote data; networking and authorization boundaries are separate from presentation. `edge_browser` only opens validated HTTPS URLs with Python's standard-library default-browser launcher; it has no JavaScript, tab enumeration or authenticated read API. `demo` uses synthetic bytes with real storage and no live credentials.
+
+`storage` owns local layout, identity, revision handling, hashes and indexes. Query commands can inspect local material paths; sync writes local content and private metadata. Do not reuse an untrusted shared output tree, assume downloaded materials are safe to execute, or interpret hashes as a guarantee of trusted source content. Offline regression tests exercise specific path/integrity cases, not a proof against all concurrent filesystem attacks.
+
+Secure writes require macOS/Linux POSIX O_NOFOLLOW directory operations and fail closed on Windows. Random private staging and atomic publication protect leaf writes; downloaded user edits and unrelated file IDs are preserved. Generated metadata/index exports are replaced. Concurrent writers and hostile same-user directory renames are unsupported; use a trusted private workspace. Revision markers remain the remote cache authority, not proof a provider never changes content under the same revision.
+
+No remote submissions, grade changes, discussion posting, scheduler, calendar integration, hosted backend or automatic AI upload is provided. Read-only describes coursework operations, not absence of local writes or auth/session effects. Public HTML parsers are narrow heuristics. Service permission, software licensing, and rights to student/course content are independent.

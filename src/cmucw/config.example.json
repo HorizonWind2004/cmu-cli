@@ -1,0 +1,19 @@
+{
+  "canvas_base_url": "https://canvas.example.invalid",
+  "storage_root": "./downloads",
+  "term": "Example Term",
+  "timezone": "America/New_York",
+  "courses": [
+    {
+      "code": "DEMO-101",
+      "canvas_id": 1,
+      "name": "Synthetic Example Course",
+      "directory": "demo-101",
+      "piazza_url": null,
+      "gradescope_url": null,
+      "public_site_url": null,
+      "assessment_year": 2030,
+      "assessment_hour": 14
+    }
+  ]
+}
