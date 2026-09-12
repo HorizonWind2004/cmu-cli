@@ -6,13 +6,8 @@ import webbrowser
 
 import pytest
 
-from cmu_cli import cli
-from cmu_cli.auth import (
-    OOB,
-    RegistrationError,
-    check_registration,
-    validate_registration,
-)
+from cmucw import cli
+from cmucw.auth import OOB, RegistrationError, check_registration, validate_registration
 
 
 def registration():
@@ -48,7 +43,7 @@ def test_valid_metadata_is_not_authorization():
         {"pkce_method": "plain"},
         {"secret_custody": "shared_embedded"},
         {"redirect_uri": "http://127.0.0.1:8000/callback"},
-        {"redirect_uri": "cmu-cli://callback"},
+        {"redirect_uri": "cmucw://callback"},
         {"canvas_base_url": "https://user:secret@canvas.example.edu"},
         {"canvas_base_url": "https://canvas.example.edu?token=secret"},
         {"canvas_base_url": "https://canvas.example.edu#"},
@@ -98,14 +93,7 @@ def test_cli_offline_and_never_claims_ready(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(
         sys,
         "argv",
-        [
-            "cmu-cli",
-            "auth",
-            "check-registration",
-            "--registration",
-            str(path),
-            "--json",
-        ],
+        ["cmucw", "auth", "check-registration", "--registration", str(path), "--json"],
     )
     with pytest.raises(SystemExit) as exc:
         cli.main()

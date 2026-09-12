@@ -1,8 +1,8 @@
 from types import SimpleNamespace
 from typing import Any, cast
 
-from cmu_cli.gradescope_client import GradescopeClient
-from cmu_cli.models import Course
+from cmucw.gradescope_client import GradescopeClient
+from cmucw.models import Course
 
 
 def test_assignment_parser_uses_due_time_not_release_time():

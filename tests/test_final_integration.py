@@ -8,8 +8,8 @@ from types import SimpleNamespace
 import pytest
 from jsonschema import Draft202012Validator, FormatChecker
 
-from cmu_cli import cli, storage
-from cmu_cli.canvas_client import CanvasClient
+from cmucw import cli, storage
+from cmucw.canvas_client import CanvasClient
 from tests.test_network_security import BASE, payload, transport
 
 SCHEMA = json.loads(
@@ -38,7 +38,7 @@ def run(monkeypatch, capsys, tmp_path, command, replies, courses=None):
         lambda base, **kwargs: CanvasClient(base, session, **kwargs),
     )
     monkeypatch.setattr(
-        sys, "argv", ["cmu-cli", "--config", str(config), *command, "--json"]
+        sys, "argv", ["cmucw", "--config", str(config), *command, "--json"]
     )
     with pytest.raises(SystemExit) as error:
         cli.main()

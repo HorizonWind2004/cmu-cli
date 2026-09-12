@@ -1,4 +1,4 @@
-from cmu_cli.official_materials import public_materials, readable_topic
+from cmucw.official_materials import public_materials, readable_topic
 
 
 class FakeResponse:
@@ -47,11 +47,11 @@ def test_public_materials_discovers_only_linked_slide_pdfs(monkeypatch):
     </table>
     """
     monkeypatch.setattr(
-        "cmu_cli.official_materials.public_document",
+        "cmucw.official_materials.public_document",
         lambda *args, **kwargs: html.encode(),
     )
     monkeypatch.setattr(
-        "cmu_cli.official_materials.safe_request",
+        "cmucw.official_materials.safe_request",
         lambda session, url, **kw: FakeSession().head(url, 30, False),
     )
     rows = public_materials("DEMO-101", "https://courses.example.invalid/")

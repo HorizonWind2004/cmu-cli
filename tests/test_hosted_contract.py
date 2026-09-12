@@ -7,17 +7,17 @@ import sys
 import pytest
 from jsonschema import ValidationError
 
-from cmu_cli import cli
+from cmucw import cli
 from tests.test_auth_registration import registration
 from tests.test_final_integration import VALIDATOR
 
 
 @pytest.mark.parametrize("value", [float("nan"), float("inf"), float("-inf")])
 def test_nonfinite_provider_data_is_one_safe_error(monkeypatch, capsys, value):
-    from cmu_cli import demo
+    from cmucw import demo
 
     monkeypatch.setattr(demo, "run_demo", lambda: {"points": value})
-    monkeypatch.setattr(sys, "argv", ["cmu-cli", "demo", "--json"])
+    monkeypatch.setattr(sys, "argv", ["cmucw", "demo", "--json"])
     with pytest.raises(SystemExit) as result:
         cli.main()
     assert result.value.code == 2
@@ -42,14 +42,7 @@ def test_auth_schema_rejects_false_readiness(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(
         sys,
         "argv",
-        [
-            "cmu-cli",
-            "auth",
-            "check-registration",
-            "--registration",
-            str(path),
-            "--json",
-        ],
+        ["cmucw", "auth", "check-registration", "--registration", str(path), "--json"],
     )
     with pytest.raises(SystemExit) as result:
         cli.main()
